@@ -304,7 +304,7 @@ def extract_cards_all_pages(path_output, num_inferences=3, verbose=False):
     return path_output_cards
 
 
-def group_chapters(path_output, chapter_pages, kill_list, strip_list):
+def group_chapters(path_output, chapter_pages, kill_list, strip_list, separator):
     print("Grouping cards by chapters...")
 
     path_input_cards = os.path.join(path_output, "cards_pages_independent")
@@ -333,11 +333,17 @@ def group_chapters(path_output, chapter_pages, kill_list, strip_list):
 
             cumulative_cards = dict(sorted(cumulative_cards.items()))
             with open(os.path.join(path_output_cumulative, chapter_file), "w") as fp:
-                fp.write("\n".join([f"{k} = {v}" for k, v in cumulative_cards.items()]))
+                fp.write(
+                    "\n".join(
+                        [f"{k} {separator} {v}" for k, v in cumulative_cards.items()]
+                    )
+                )
 
         chapter_cards = dict(sorted(chapter_cards.items()))
         with open(os.path.join(path_output_by_chapter, chapter_file), "w") as fp:
-            fp.writelines("\n".join([f"{k} = {v}" for k, v in chapter_cards.items()]))
+            fp.writelines(
+                "\n".join([f"{k} {separator} {v}" for k, v in chapter_cards.items()])
+            )
 
         chapter_cards = {}
         chapter_id += 1
@@ -388,6 +394,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Extract language cards from a PDF")
     parser.add_argument("pdf_path", type=str, help="PDF input")
     parser.add_argument(
+        "--separator",
+        type=str,
+        default="\t",
+        help="Separator character. = for Quizlet, \t for Anki",
+    )
+    parser.add_argument(
         "--pdf_page_first", type=int, default=None, help="First page to process"
     )
     parser.add_argument(
@@ -406,8 +418,16 @@ if __name__ == "__main__":
         default=None,
         help="List of page numbers with new chapters",
     )
-    parser.add_argument("--kill", type=str, nargs="+", default=None, help="Cards keys to remove from the output")
-    parser.add_argument("--strip", type=str, nargs="+", default=None, help="Texts to strip from cards")
+    parser.add_argument(
+        "--kill",
+        type=str,
+        nargs="+",
+        default=None,
+        help="Cards keys to remove from the output",
+    )
+    parser.add_argument(
+        "--strip", type=str, nargs="+", default=None, help="Texts to strip from cards"
+    )
     parser.add_argument(
         "--verbose", action="store_true", help="Output more details about the process"
     )
@@ -430,6 +450,8 @@ if __name__ == "__main__":
         args.out_path, verbose=args.verbose
     )
 
-    out_paths_cards_chapters = group_chapters(args.out_path, args.chapter_pages, args.kill, args.strip)
+    out_paths_cards_chapters = group_chapters(
+        args.out_path, args.chapter_pages, args.kill, args.strip, args.separator
+    )
 
     print("Done.")
