@@ -5,6 +5,11 @@ This repository implements a workflow to extract unique words from a PDF and out
 See this X (Twitter) post for the story behind this repository, and follow me for more updates!
 https://twitter.com/AntonObukhov1/status/1758640714613932321
 
+## Begegnungen B1
+
+### A NOTE from 2024.Feb.21: 
+Bad cards exist with wrong spelling (rechzeitig), the wrong first side (plural instead of singular), and maybe worse, e.g., incorrect definite article, reflectivity, and tense forms. Use at your own risk! If you feel like contributing back, please create an issue [here](https://github.com/toshas/language-learning/issues) with the title "[DECK NAME] [CARD NAME]" and explain the problem in the issue body. 
+
 ## Setup
 
 (Linux, Mac, Windows WSL)
