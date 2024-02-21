@@ -1,6 +1,9 @@
 # Automating flashcards extraction for language learning
 
-This repository implements a workflow to extract unique words from a PDF and output them in a flashcards format, compatible with Anki or Quizlet.
+This repository implements a workflow to extract unique words from a PDF and output them in a flashcard format, compatible with Anki or Quizlet.
+
+See this X (Twitter) post for the story behind this repository, and follow me for more updates!
+https://twitter.com/AntonObukhov1/status/1758640714613932321
 
 ## Setup
 
